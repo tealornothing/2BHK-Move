@@ -9,19 +9,17 @@
 html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f0efed; color:#1a1a1a; min-height:100vh; width:100%; max-width:430px; margin:0 auto; font-size:16px; }
 
 .app-tabs { display:flex; background:#f0efed; border-bottom:1px solid #e0dedd; position:sticky; top:0; z-index:50; }
-.app-tab { flex:1; padding:14px 0 12px; font-size:0.78rem; letter-spacing:0.07em; text-transform:uppercase; text-align:center; cursor:pointer; color:#aaa; border-bottom:2px solid transparent; transition:color 0.15s; }
+.app-tab { flex:1; padding:14px 0 12px; font-size:0.78rem; letter-spacing:0.07em; text-transform:uppercase; text-align:center; cursor:pointer; color:#aaa; border-bottom:2px solid transparent; }
 .app-tab.active { color:#1a1a1a; border-bottom-color:#1a1a1a; }
 
 #screen-home,#screen-move { display:none; }
 
-/* HOME */
 .home-header { padding:28px 20px 16px; display:flex; align-items:flex-start; justify-content:space-between; }
 .home-header h1 { font-size:1.45rem; font-weight:300; letter-spacing:-0.03em; white-space:nowrap; }
 .home-header p { margin-top:5px; font-size:0.68rem; color:#999; letter-spacing:0.1em; text-transform:uppercase; }
 .icon-btn { background:#e4e3e0; border:none; border-radius:8px; width:36px; height:36px; font-size:1rem; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; }
 .icon-btn:active { opacity:0.7; }
 
-/* SKETCH */
 .sketch-container { margin:0 20px 20px; background:#fff; border:1px solid #ddd; border-radius:12px; overflow:hidden; position:relative; }
 .sketch-container img { width:100%; display:block; opacity:0.92; }
 .sketch-label { position:absolute; bottom:8px; right:10px; font-size:0.6rem; color:#bbb; letter-spacing:0.07em; text-transform:uppercase; }
@@ -85,11 +83,13 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 .move-panel { display:none; padding:16px 20px 100px; }
 .move-panel.active { display:block; }
 
+/* ITEMS */
 .room-section { margin-bottom:20px; }
 .room-section-header { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#aaa; margin-bottom:8px; }
 .item-card { background:#fff; border-radius:10px; margin-bottom:6px; border:1px solid #e8e6e3; overflow:hidden; }
 .item-line1 { display:flex; align-items:center; padding:10px 12px 8px; gap:10px; border-bottom:1px solid #f4f3f1; }
-.item-name { font-size:0.88rem; flex:1; color:#1a1a1a; }
+.item-name-input { font-size:0.88rem; flex:1; color:#1a1a1a; border:none; outline:none; background:transparent; font-family:inherit; min-width:0; }
+.item-name-input::placeholder { color:#ccc; }
 .status-toggle { display:flex; border-radius:6px; overflow:hidden; border:1px solid #e0dedd; flex-shrink:0; }
 .st-btn { padding:4px 7px; font-size:0.6rem; letter-spacing:0.04em; text-transform:uppercase; border:none; background:#f8f7f6; color:#aaa; cursor:pointer; }
 .st-btn.active-keep { background:#d4d9ce; color:#3a5a2a; }
@@ -97,9 +97,9 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 .st-btn.active-unsure { background:#e8e4d0; color:#7a6a20; }
 .item-line2 { display:flex; align-items:center; padding:7px 12px 9px; gap:8px; }
 .transport-sel { font-size:0.75rem; border:1px solid #e0dedd; border-radius:6px; padding:5px 8px; background:#f8f7f6; color:#555; outline:none; flex:1; -webkit-appearance:none; }
-.special-btn { width:28px; height:28px; border-radius:6px; border:1px solid #e0dedd; background:#f8f7f6; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#aaa; }
+.special-btn { width:28px; height:28px; border-radius:6px; border:1px solid #e0dedd; background:#f8f7f6; font-size:0.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#aaa; flex-shrink:0; }
 .special-btn.flagged { background:#fff3cd; border-color:#e6c84a; color:#b8860b; }
-.del-btn { width:28px; height:28px; border-radius:6px; border:1px solid #f0dede; background:#fdf5f5; font-size:0.85rem; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#c88; }
+.del-btn { width:28px; height:28px; border-radius:6px; border:1px solid #f0dede; background:#fdf5f5; font-size:0.85rem; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#c88; flex-shrink:0; }
 .special-note { padding:6px 12px 10px; background:#fffdf0; border-top:1px solid #f5efc0; }
 .special-note input { width:100%; border:none; outline:none; font-size:0.8rem; color:#555; background:transparent; font-family:inherit; }
 .special-note input::placeholder { color:#ccc; }
@@ -112,18 +112,42 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 .sb-item { flex:1; padding:10px 4px; text-align:center; }
 .sb-num { font-size:1rem; font-weight:300; }
 .sb-label { font-size:0.55rem; letter-spacing:0.08em; text-transform:uppercase; color:#aaa; margin-top:2px; }
-.sb-keep { color:#5a8a4a; } .sb-dispose { color:#c05050; } .sb-unsure { color:#a08030; } .sb-unassigned { color:#888; }
+.sb-keep{color:#5a8a4a;} .sb-dispose{color:#c05050;} .sb-unsure{color:#a08030;} .sb-unassigned{color:#888;}
 
-.sat-section-title { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#aaa; margin:0 0 10px; }
+/* SATURDAY */
+.progress-wrap { background:#fff; border-radius:12px; padding:14px 16px; margin-bottom:16px; border:1px solid #e8e6e3; }
+.progress-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.progress-title { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#aaa; }
+.progress-count { font-size:0.75rem; color:#888; font-family:'Courier New',monospace; }
+.progress-track { height:5px; background:#f0efed; border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; background:#7a8f6a; border-radius:3px; transition:width 0.3s ease; }
+
+.priority-section { margin-bottom:16px; }
+.priority-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.priority-badge { font-size:0.6rem; font-weight:600; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; text-transform:uppercase; }
+.p0-badge { background:#fde8e8; color:#b83232; }
+.p1-badge { background:#fdf3e0; color:#a06820; }
+.p2-badge { background:#e8f0e8; color:#3a6a3a; }
+.done-badge { background:#f0f0ee; color:#aaa; }
+.priority-label { font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase; color:#bbb; }
+
 .task-card { background:#fff; border-radius:10px; margin-bottom:6px; border:1px solid #e8e6e3; padding:10px 12px; display:flex; gap:10px; align-items:flex-start; }
+.task-card.done-card { background:#fafaf8; }
 .task-check { width:20px; height:20px; border-radius:5px; border:1.5px solid #ddd; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px; }
 .task-check.checked { background:#1a1a1a; border-color:#1a1a1a; }
 .task-check.checked::after { content:'✓'; color:#fff; font-size:0.7rem; }
-.task-body { flex:1; }
+.task-body { flex:1; min-width:0; }
 .task-text { font-size:0.88rem; color:#1a1a1a; line-height:1.4; }
 .task-text.checked-text { color:#bbb; text-decoration:line-through; }
 .task-note-input { width:100%; border:none; border-top:1px solid #f4f3f1; outline:none; font-size:0.75rem; color:#888; background:transparent; font-family:inherit; margin-top:6px; padding-top:6px; }
 .task-note-input::placeholder { color:#ddd; }
+.task-actions { display:flex; flex-direction:column; gap:4px; flex-shrink:0; }
+.prio-btn { font-size:0.55rem; font-weight:600; letter-spacing:0.05em; padding:3px 6px; border-radius:5px; border:none; cursor:pointer; text-transform:uppercase; }
+.prio-p0 { background:#fde8e8; color:#b83232; }
+.prio-p1 { background:#fdf3e0; color:#a06820; }
+.prio-p2 { background:#e8f0e8; color:#3a6a3a; }
+
+.sat-section-title { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#aaa; margin:0 0 10px; }
 .unsure-section { margin-top:24px; }
 .unsure-item { background:#fff8e8; border-radius:10px; margin-bottom:6px; border:1px solid #f0e8c0; padding:10px 12px; display:flex; align-items:center; gap:10px; }
 .unsure-name { flex:1; font-size:0.88rem; }
@@ -132,6 +156,7 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 .mt-btn.mk { background:#d4d9ce; color:#3a5a2a; }
 .mt-btn.md { background:#e8d5d5; color:#8a2a2a; }
 
+/* SUNDAY */
 .sunday-section { margin-bottom:24px; }
 .sunday-section-title { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#aaa; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #e8e6e3; }
 .sunday-group { margin-bottom:12px; }
@@ -142,6 +167,7 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 .sunday-empty { color:#ccc; font-size:0.8rem; font-style:italic; padding:8px 0; }
 .warning-banner { background:#fff8e0; border:1px solid #f0e0a0; border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:0.8rem; color:#8a6a00; }
 
+/* DISPOSE */
 .dispose-item { background:#fff; border-radius:10px; margin-bottom:6px; border:1px solid #e8e6e3; padding:10px 12px; }
 .dispose-top { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
 .dispose-name { flex:1; font-size:0.88rem; }
@@ -153,45 +179,37 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 .dispose-done-text { text-decoration:line-through; color:#bbb; }
 .dispose-progress { text-align:center; font-size:0.78rem; color:#aaa; margin-top:16px; letter-spacing:0.06em; }
 
-/* SYNC STATUS */
 .sync-dot { width:7px; height:7px; border-radius:50%; background:#ccc; display:inline-block; margin-right:5px; vertical-align:middle; }
-.sync-dot.synced { background:#7a8f6a; }
-.sync-dot.syncing { background:#e6c84a; }
-.sync-dot.error { background:#c05050; }
+.sync-dot.synced{background:#7a8f6a;} .sync-dot.syncing{background:#e6c84a;} .sync-dot.error{background:#c05050;}
 .sync-bar { text-align:center; font-size:0.65rem; color:#bbb; padding:6px; letter-spacing:0.05em; }
 
 .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%); background:#1a1a1a; color:#f0efed; border-radius:20px; padding:8px 18px; font-size:0.75rem; letter-spacing:0.05em; opacity:0; transition:opacity 0.2s; pointer-events:none; white-space:nowrap; z-index:200; }
 .toast.show { opacity:1; }
 
-/* LOADING */
 #loading-screen { position:fixed; inset:0; background:#f0efed; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; z-index:100; }
 .spinner { width:28px; height:28px; border:2px solid #ddd; border-top-color:#1a1a1a; border-radius:50%; animation:spin 0.7s linear infinite; }
-@keyframes spin { to { transform:rotate(360deg); } }
+@keyframes spin { to{transform:rotate(360deg);} }
 .loading-text { font-size:0.72rem; color:#aaa; letter-spacing:0.08em; text-transform:uppercase; }
 
 @media print {
-  body { max-width:100%; background:#fff; }
-  #screen-home,#screen-move,#loading-screen { display:none!important; }
-  #print-area { display:block!important; }
-  .toast,.summary-bar { display:none!important; }
+  body{max-width:100%;background:#fff;}
+  #screen-home,#screen-move,#loading-screen{display:none!important;}
+  #print-area{display:block!important;}
+  .toast,.summary-bar{display:none!important;}
 }
-#print-area { display:none; padding:32px; font-family:-apple-system,'Helvetica Neue',sans-serif; }
-#print-area h1 { font-size:1.4rem; font-weight:300; margin-bottom:4px; }
-.print-date { font-size:0.7rem; color:#999; margin-bottom:24px; letter-spacing:0.06em; text-transform:uppercase; }
-.print-room { margin-bottom:20px; page-break-inside:avoid; }
-.print-room h2 { font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#888; border-bottom:1px solid #eee; padding-bottom:6px; margin-bottom:8px; }
-.print-row { display:flex; justify-content:space-between; font-size:0.85rem; padding:4px 0; }
-.print-val { font-weight:500; font-family:'Courier New',monospace; }
-.print-empty { font-size:0.78rem; color:#ccc; font-style:italic; }
+#print-area{display:none;padding:32px;font-family:-apple-system,'Helvetica Neue',sans-serif;}
+#print-area h1{font-size:1.4rem;font-weight:300;margin-bottom:4px;}
+.print-date{font-size:0.7rem;color:#999;margin-bottom:24px;letter-spacing:0.06em;text-transform:uppercase;}
+.print-room{margin-bottom:20px;page-break-inside:avoid;}
+.print-room h2{font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#888;border-bottom:1px solid #eee;padding-bottom:6px;margin-bottom:8px;}
+.print-row{display:flex;justify-content:space-between;font-size:0.85rem;padding:4px 0;}
+.print-val{font-weight:500;font-family:'Courier New',monospace;}
+.print-empty{font-size:0.78rem;color:#ccc;font-style:italic;}
 </style>
 </head>
 <body>
 
-<div id="loading-screen">
-  <div class="spinner"></div>
-  <div class="loading-text">Loading your home…</div>
-</div>
-
+<div id="loading-screen"><div class="spinner"></div><div class="loading-text">Loading your home…</div></div>
 <div class="toast" id="toast"></div>
 <div id="print-area"></div>
 
@@ -200,52 +218,34 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
   <div class="app-tab" id="apptab-move" onclick="switchAppTab('move')">Move</div>
 </div>
 
-<!-- ══ HOME ══ -->
+<!-- HOME -->
 <div id="screen-home">
   <div id="home-main">
     <div class="home-header">
       <div><h1>Linnet &amp; Teal's 2BHK</h1><p>Floor Plan · Dimensions</p></div>
       <button class="icon-btn" onclick="showExport()">↑</button>
     </div>
-
     <div class="sketch-container" id="sketch-container">
       <div class="sketch-upload-area">
-        <div class="icon">🏠</div>
-        <p>Add your floor plan sketch</p>
-        <label class="upload-label">Upload Sketch
-          <input type="file" accept="image/*" style="display:none" onchange="handleSketch(event)">
-        </label>
+        <div class="icon">🏠</div><p>Add your floor plan sketch</p>
+        <label class="upload-label">Upload Sketch<input type="file" accept="image/*" style="display:none" onchange="handleSketch(event)"></label>
       </div>
     </div>
-
     <div class="sync-bar"><span class="sync-dot" id="sync-dot"></span><span id="sync-label">Connecting…</span></div>
-
     <div class="section-label">Rooms &amp; Spaces</div>
     <div class="room-grid" id="room-grid"></div>
     <button class="summary-btn" onclick="showDimSummary()">View All Dimensions →</button>
   </div>
-
   <div id="home-summary" style="display:none">
-    <div class="screen-header">
-      <button class="back-btn" onclick="subHome()">←</button>
-      <h2>All Dimensions</h2>
-    </div>
+    <div class="screen-header"><button class="back-btn" onclick="subHome()">←</button><h2>All Dimensions</h2></div>
     <div class="summary-content" id="summary-content"></div>
   </div>
-
   <div id="screen-room" style="display:none">
-    <div class="screen-header">
-      <button class="back-btn" onclick="subHome()">←</button>
-      <h2 id="room-title"></h2>
-    </div>
+    <div class="screen-header"><button class="back-btn" onclick="subHome()">←</button><h2 id="room-title"></h2></div>
     <div class="room-content" id="room-content"></div>
   </div>
-
   <div id="screen-export" style="display:none">
-    <div class="screen-header">
-      <button class="back-btn" onclick="subHome()">←</button>
-      <h2>Export</h2>
-    </div>
+    <div class="screen-header"><button class="back-btn" onclick="subHome()">←</button><h2>Export</h2></div>
     <div class="export-content">
       <div class="export-card" onclick="exportXML()"><div class="export-icon">🗂️</div><div class="export-info"><h3>Export as XML</h3><p>Structured data file of all dimensions.</p></div></div>
       <div class="export-card" onclick="exportPDF()"><div class="export-icon">📄</div><div class="export-info"><h3>Export as PDF</h3><p>Clean printable summary.</p></div></div>
@@ -253,7 +253,7 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
   </div>
 </div>
 
-<!-- ══ MOVE ══ -->
+<!-- MOVE -->
 <div id="screen-move">
   <div class="move-subtabs">
     <div class="move-subtab active" onclick="switchMoveTab('items')">Items</div>
@@ -271,7 +271,13 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
     </div>
   </div>
   <div class="move-panel" id="panel-saturday">
-    <p class="sat-section-title">Prep Tasks</p>
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-top">
+        <span class="progress-title">Task Progress</span>
+        <span class="progress-count" id="progress-count">0 / 0</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
     <div id="tasks-list"></div>
     <div class="add-item-row" style="margin-bottom:24px">
       <input class="add-item-input" id="new-task-input" placeholder="Add a task…">
@@ -290,199 +296,132 @@ html,body { font-family:-apple-system,'Helvetica Neue',sans-serif; background:#f
 </div>
 
 <script>
-// ══ SUPABASE CONFIG ═══════════════════════════════════════
-const SB_URL = 'https://ltfdrmkhcjqjsghscolr.supabase.co';
-const SB_KEY = 'sb_publishable_RZ4DDkZM8LwHEbAQ7WU4Qw_b3_igODJ';
-const SB_HEADERS = { 'Content-Type':'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer '+SB_KEY };
+const SB_URL='https://ltfdrmkhcjqjsghscolr.supabase.co';
+const SB_KEY='sb_publishable_RZ4DDkZM8LwHEbAQ7WU4Qw_b3_igODJ';
+const SB_H={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
 
 async function sbGet(key) {
   try {
-    const r = await fetch(`${SB_URL}/rest/v1/lt2bhk_data?key=eq.${encodeURIComponent(key)}&select=value`, { headers: SB_HEADERS });
-    const d = await r.json();
-    return d && d[0] ? JSON.parse(d[0].value) : null;
-  } catch { return null; }
+    const r=await fetch(`${SB_URL}/rest/v1/lt2bhk_data?key=eq.${encodeURIComponent(key)}&select=value`,{headers:SB_H});
+    const d=await r.json(); return d&&d[0]?JSON.parse(d[0].value):null;
+  } catch{return null;}
 }
-
-async function sbSet(key, value) {
+async function sbSet(key,value) {
   try {
     setSyncStatus('syncing');
-    await fetch(`${SB_URL}/rest/v1/lt2bhk_data`, {
-      method: 'POST',
-      headers: { ...SB_HEADERS, 'Prefer': 'resolution=merge-duplicates' },
-      body: JSON.stringify({ key, value: JSON.stringify(value), updated_at: new Date().toISOString() })
-    });
+    await fetch(`${SB_URL}/rest/v1/lt2bhk_data`,{method:'POST',headers:{...SB_H,'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({key,value:JSON.stringify(value),updated_at:new Date().toISOString()})});
     setSyncStatus('synced');
-  } catch { setSyncStatus('error'); }
+  } catch{setSyncStatus('error');}
 }
-
 function setSyncStatus(s) {
-  const dot = document.getElementById('sync-dot');
-  const lbl = document.getElementById('sync-label');
-  if (!dot||!lbl) return;
-  dot.className = 'sync-dot ' + s;
-  lbl.textContent = s==='synced'?'Synced':s==='syncing'?'Saving…':'Sync error';
+  const dot=document.getElementById('sync-dot'),lbl=document.getElementById('sync-label');
+  if(!dot||!lbl)return;
+  dot.className='sync-dot '+s;
+  lbl.textContent=s==='synced'?'Synced':s==='syncing'?'Saving…':'Sync error';
 }
 
-// ══ DATA ══════════════════════════════════════════════════
-const DIM_ROOMS = [
-  { id:'living', name:'Living Room', fields:[
-    {group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},
-    {group:'Features',items:[{id:'win_x',label:'Window X'},{id:'win_y',label:'Window Y'},{id:'console_x',label:'Console X'}]}
-  ]},
-  { id:'moon', name:'Moon Room', fields:[
-    {group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},
-    {group:'Wardrobe',items:[{id:'ward_x',label:'Wardrobe X'},{id:'ward_h',label:'Wardrobe Height'}]}
-  ]},
-  { id:'kitchen', name:'Kitchen', fields:[
-    {group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},
-    {group:'Counter',items:[{id:'ctr_x',label:'Counter X'},{id:'ctr_d',label:'Counter Depth'},{id:'ctr_h',label:'Counter Height'}]}
-  ]},
-  { id:'dining', name:'Dining', fields:[
-    {group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},
-    {group:'Cabinet',items:[{id:'cab_x',label:'Cabinet X'},{id:'cab_h',label:'Cabinet Height'}]}
-  ]},
-  { id:'sunroom', name:'Sunroom', fields:[
-    {group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},
-    {group:'Wardrobe',items:[{id:'ward_x',label:'Wardrobe X'},{id:'ward_h',label:'Wardrobe Height'}]}
-  ]},
-  { id:'bath1', name:'Bathroom 1', fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
-  { id:'bath2', name:'Bathroom 2', fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
-  { id:'balcony', name:'Balcony', fields:[{group:'Area',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
-  { id:'utility', name:'Utility', fields:[{group:'Area',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
-  { id:'outdoor', name:'Outdoor Tiled', fields:[{group:'Area',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
+const DIM_ROOMS=[
+  {id:'living',name:'Living Room',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},{group:'Features',items:[{id:'win_x',label:'Window X'},{id:'win_y',label:'Window Y'},{id:'console_x',label:'Console X'}]}]},
+  {id:'moon',name:'Moon Room',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},{group:'Wardrobe',items:[{id:'ward_x',label:'Wardrobe X'},{id:'ward_h',label:'Wardrobe Height'}]}]},
+  {id:'kitchen',name:'Kitchen',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},{group:'Counter',items:[{id:'ctr_x',label:'Counter X'},{id:'ctr_d',label:'Counter Depth'},{id:'ctr_h',label:'Counter Height'}]}]},
+  {id:'dining',name:'Dining',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},{group:'Cabinet',items:[{id:'cab_x',label:'Cabinet X'},{id:'cab_h',label:'Cabinet Height'}]}]},
+  {id:'sunroom',name:'Sunroom',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]},{group:'Wardrobe',items:[{id:'ward_x',label:'Wardrobe X'},{id:'ward_h',label:'Wardrobe Height'}]}]},
+  {id:'bath1',name:'Bathroom 1',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
+  {id:'bath2',name:'Bathroom 2',fields:[{group:'Room',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
+  {id:'balcony',name:'Balcony',fields:[{group:'Area',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
+  {id:'utility',name:'Utility',fields:[{group:'Area',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
+  {id:'outdoor',name:'Outdoor Tiled',fields:[{group:'Area',items:[{id:'x',label:'X — Horizontal'},{id:'y',label:'Y — Vertical'}]}]},
 ];
-
-const MOVE_CATEGORIES = ['Living','Bedroom','Kitchen','Other'];
-const DEFAULT_ITEMS = [
+const MOVE_CATEGORIES=['Living','Bedroom','Kitchen','Other'];
+const DEFAULT_ITEMS=[
   {cat:'Living',name:'Sofa'},{cat:'Living',name:'Coffee Table'},{cat:'Living',name:'TV'},{cat:'Living',name:'TV Stand'},{cat:'Living',name:'Bookshelf'},{cat:'Living',name:'Floor Lamp'},
   {cat:'Bedroom',name:'Bed Frame'},{cat:'Bedroom',name:'Mattress'},{cat:'Bedroom',name:'Wardrobe'},{cat:'Bedroom',name:'Side Table'},{cat:'Bedroom',name:'Study Desk'},{cat:'Bedroom',name:'Chair'},
   {cat:'Kitchen',name:'Fridge',special:true,specialNote:'Defrost night before. Keep upright.'},{cat:'Kitchen',name:'Stove',special:true,specialNote:'Disconnect gas. Handle with care.'},{cat:'Kitchen',name:'Washing Machine',special:true,specialNote:'Drain hose. Secure drum.'},{cat:'Kitchen',name:'Microwave'},{cat:'Kitchen',name:'Utensil Boxes'},
   {cat:'Other',name:'Misc Boxes'},{cat:'Other',name:'Luggage'},{cat:'Other',name:'Plants'},
 ];
-const DEFAULT_TASKS = [
+const DEFAULT_TASKS=[
   'Take down curtains','Take down balcony mosquito mesh','Clear fridge — eat, toss, or pack remaining food',
   'Group spillable food — pack upright, seal lids','Take out all trash and waste',
   'Confirm dispose list — decide on every unsure item','Brief on cab items and special handling',
   'Identify and set aside scooter load','Walk every room — nothing missed',
 ];
 
-let dimData={}, moveItems=[], tasks=[], currentDimRoom=null, saveTimer=null;
+let dimData={},moveItems=[],tasks=[],currentDimRoom=null,dimSaveTimer=null,itemSaveTimer=null,taskSaveTimer=null;
 
-function buildDefaultItems() {
-  return DEFAULT_ITEMS.map((d,i)=>({ id:'item_'+i, cat:d.cat, name:d.name, status:'unsure', transport:'', special:d.special||false, specialNote:d.specialNote||'', disposeMethod:'', disposeDone:false }));
-}
-function buildDefaultTasks() {
-  return DEFAULT_TASKS.map((t,i)=>({ id:'task_'+i, text:t, done:false, note:'' }));
-}
+function buildDefaultItems(){return DEFAULT_ITEMS.map((d,i)=>({id:'item_'+i,cat:d.cat,name:d.name,status:'unsure',transport:'',special:d.special||false,specialNote:d.specialNote||'',disposeMethod:'',disposeDone:false}));}
+function buildDefaultTasks(){return DEFAULT_TASKS.map((t,i)=>({id:'task_'+i,text:t,done:false,note:'',priority:'p1'}));}
 
-// ══ LOAD / SAVE ═══════════════════════════════════════════
-async function loadAll() {
-  // load dims
-  const dims = await sbGet('dims');
-  dimData = dims || {};
-
-  // load items
-  const items = await sbGet('items');
-  moveItems = items || buildDefaultItems();
-
-  // load tasks
-  const tks = await sbGet('tasks');
-  tasks = tks || buildDefaultTasks();
-
-  // load sketch
-  const sketch = await sbGet('sketch');
-  if (sketch) showSketchImg(sketch);
-
+async function loadAll(){
+  const dims=await sbGet('dims'); dimData=dims||{};
+  const items=await sbGet('items'); moveItems=items||buildDefaultItems();
+  // migrate old tasks that lack priority field
+  const tks=await sbGet('tasks');
+  tasks=(tks||buildDefaultTasks()).map(t=>({priority:'p1',...t}));
+  const sketch=await sbGet('sketch'); if(sketch)showSketchImg(sketch);
   setSyncStatus('synced');
 }
 
-let dimSaveTimer=null, itemSaveTimer=null, taskSaveTimer=null;
-function scheduleSaveDims() { clearTimeout(dimSaveTimer); dimSaveTimer=setTimeout(()=>sbSet('dims',dimData),800); }
-function scheduleSaveItems() { clearTimeout(itemSaveTimer); itemSaveTimer=setTimeout(()=>sbSet('items',moveItems),800); }
-function scheduleSaveTasks() { clearTimeout(taskSaveTimer); taskSaveTimer=setTimeout(()=>sbSet('tasks',tasks),800); }
+function scheduleSaveDims(){clearTimeout(dimSaveTimer);dimSaveTimer=setTimeout(()=>sbSet('dims',dimData),800);}
+function scheduleSaveItems(){clearTimeout(itemSaveTimer);itemSaveTimer=setTimeout(()=>sbSet('items',moveItems),800);}
+function scheduleSaveTasks(){clearTimeout(taskSaveTimer);taskSaveTimer=setTimeout(()=>sbSet('tasks',tasks),800);}
 
-// ══ TOAST ═════════════════════════════════════════════════
 let toastTimer;
-function showToast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),1800);
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800);}
 
-// ══ SKETCH ════════════════════════════════════════════════
-function showSketchImg(src) {
-  document.getElementById('sketch-container').innerHTML =
-    `<img src="${src}" style="width:100%;display:block;opacity:0.92">
-     <div class="sketch-label">Your sketch</div>`;
-}
-function handleSketch(e) {
-  const f=e.target.files[0]; if(!f) return;
+function showSketchImg(src){document.getElementById('sketch-container').innerHTML=`<img src="${src}" style="width:100%;display:block;opacity:0.92"><div class="sketch-label">Your sketch</div>`;}
+function handleSketch(e){
+  const f=e.target.files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=async ev=>{
-    const b64=ev.target.result;
-    showSketchImg(b64);
-    setSyncStatus('syncing');
-    await sbSet('sketch', b64);
-    showToast('Sketch saved ✓');
-  };
+  r.onload=async ev=>{showSketchImg(ev.target.result);setSyncStatus('syncing');await sbSet('sketch',ev.target.result);showToast('Sketch saved ✓');};
   r.readAsDataURL(f);
 }
 
-// ══ APP TAB NAV ═══════════════════════════════════════════
-function switchAppTab(tab) {
+function switchAppTab(tab){
   document.getElementById('screen-home').style.display=tab==='home'?'block':'none';
   document.getElementById('screen-move').style.display=tab==='move'?'block':'none';
   document.getElementById('apptab-home').classList.toggle('active',tab==='home');
   document.getElementById('apptab-move').classList.toggle('active',tab==='move');
   document.getElementById('summary-bar').style.display='none';
-  if(tab==='home') { buildDimCards(); }
-  if(tab==='move') { renderItems(); updateSummaryBar(); document.getElementById('summary-bar').style.display='flex'; }
+  if(tab==='home'){buildDimCards();}
+  if(tab==='move'){renderItems();updateSummaryBar();document.getElementById('summary-bar').style.display='flex';}
 }
-function subHome() {
+function subHome(){
+  ['home-summary','screen-room','screen-export'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('home-main').style.display='block';
-  document.getElementById('home-summary').style.display='none';
-  document.getElementById('screen-room').style.display='none';
-  document.getElementById('screen-export').style.display='none';
-  buildDimCards();
-  window.scrollTo(0,0);
+  buildDimCards();window.scrollTo(0,0);
 }
 
-// ══ MOVE SUBTAB ═══════════════════════════════════════════
-function switchMoveTab(tab) {
-  document.querySelectorAll('.move-subtab').forEach((el,i)=>{
-    el.classList.toggle('active',['items','saturday','sunday','dispose'][i]===tab);
-  });
+function switchMoveTab(tab){
+  document.querySelectorAll('.move-subtab').forEach((el,i)=>el.classList.toggle('active',['items','saturday','sunday','dispose'][i]===tab));
   document.querySelectorAll('.move-panel').forEach(el=>el.classList.remove('active'));
   document.getElementById('panel-'+tab).classList.add('active');
   document.getElementById('summary-bar').style.display=tab==='items'?'flex':'none';
   if(tab==='items'){renderItems();updateSummaryBar();}
-  if(tab==='saturday') renderSaturday();
-  if(tab==='sunday') renderSunday();
-  if(tab==='dispose') renderDispose();
+  if(tab==='saturday')renderSaturday();
+  if(tab==='sunday')renderSunday();
+  if(tab==='dispose')renderDispose();
 }
 
-// ══ ITEMS ═════════════════════════════════════════════════
-function renderItems() {
+// ── ITEMS (editable names, no full re-render on input) ──
+function renderItems(){
   let html='';
   MOVE_CATEGORIES.forEach(cat=>{
     html+=`<div class="room-section"><div class="room-section-header">${cat}</div>`;
-    moveItems.filter(i=>i.cat===cat).forEach(item=>{ html+=renderItemCard(item); });
-    html+=`<div class="add-item-row">
-      <input class="add-item-input" placeholder="Add item…" id="add-${cat}" onkeydown="if(event.key==='Enter')addItem('${cat}')">
-      <button class="add-item-btn" onclick="addItem('${cat}')">+</button>
-    </div></div>`;
+    moveItems.filter(i=>i.cat===cat).forEach(item=>{html+=renderItemCard(item);});
+    html+=`<div class="add-item-row"><input class="add-item-input" placeholder="Add item…" id="add-${cat}" onkeydown="if(event.key==='Enter')addItem('${cat}')"><button class="add-item-btn" onclick="addItem('${cat}')">+</button></div></div>`;
   });
   document.getElementById('items-list').innerHTML=html;
 }
-function renderItemCard(item) {
+function renderItemCard(item){
   const ks=item.status==='keep'?'active-keep':'';
   const ds=item.status==='dispose'?'active-dispose':'';
   const us=item.status==='unsure'?'active-unsure':'';
   const opts=['','Porters','Cab','Scooter','Deal with later'].map(o=>`<option value="${o}" ${item.transport===o?'selected':''}>${o||'Transport…'}</option>`).join('');
   return `<div class="item-card" id="icard-${item.id}">
     <div class="item-line1">
-      <span class="item-name">${item.name}</span>
+      <input class="item-name-input" value="${item.name}" placeholder="Item name"
+        oninput="updateItemName('${item.id}',this.value)"
+        onblur="updateItemName('${item.id}',this.value)">
       <div class="status-toggle">
         <button class="st-btn ${ks}" onclick="setStatus('${item.id}','keep')">Keep</button>
         <button class="st-btn ${ds}" onclick="setStatus('${item.id}','dispose')">Out</button>
@@ -497,50 +436,77 @@ function renderItemCard(item) {
     ${item.special?`<div class="special-note"><input placeholder="Special instruction…" value="${item.specialNote||''}" oninput="setSpecialNote('${item.id}',this.value)"></div>`:''}
   </div>`;
 }
-function setStatus(id,status) {
-  const item=moveItems.find(i=>i.id===id); if(!item) return;
-  item.status=status; scheduleSaveItems();
-  const card=document.getElementById('icard-'+id); if(card) card.outerHTML=renderItemCard(item);
+
+function updateItemName(id,val){
+  const item=moveItems.find(i=>i.id===id);if(item){item.name=val;scheduleSaveItems();}
+}
+function setStatus(id,status){
+  const item=moveItems.find(i=>i.id===id);if(!item)return;
+  item.status=status;scheduleSaveItems();
+  // only re-render the status toggle buttons inside the card, not the whole card
+  const card=document.getElementById('icard-'+id);if(!card)return;
+  card.querySelectorAll('.st-btn').forEach((btn,i)=>{
+    btn.className='st-btn';
+    if(i===0&&status==='keep')btn.className='st-btn active-keep';
+    if(i===1&&status==='dispose')btn.className='st-btn active-dispose';
+    if(i===2&&status==='unsure')btn.className='st-btn active-unsure';
+  });
   updateSummaryBar();
 }
-function setTransport(id,val) {
-  const item=moveItems.find(i=>i.id===id); if(item){item.transport=val;scheduleSaveItems();updateSummaryBar();}
-}
-function toggleSpecial(id) {
-  const item=moveItems.find(i=>i.id===id); if(!item) return;
-  item.special=!item.special; scheduleSaveItems(); renderItems();
-}
-function setSpecialNote(id,val) {
-  const item=moveItems.find(i=>i.id===id); if(item){item.specialNote=val;scheduleSaveItems();}
-}
-function deleteItem(id) {
-  moveItems=moveItems.filter(i=>i.id!==id); scheduleSaveItems(); renderItems(); updateSummaryBar();
-}
-function addItem(cat) {
-  const inp=document.getElementById('add-'+cat); if(!inp||!inp.value.trim()) return;
+function setTransport(id,val){const item=moveItems.find(i=>i.id===id);if(item){item.transport=val;scheduleSaveItems();updateSummaryBar();}}
+function toggleSpecial(id){const item=moveItems.find(i=>i.id===id);if(!item)return;item.special=!item.special;scheduleSaveItems();renderItems();}
+function setSpecialNote(id,val){const item=moveItems.find(i=>i.id===id);if(item){item.specialNote=val;scheduleSaveItems();}}
+function deleteItem(id){moveItems=moveItems.filter(i=>i.id!==id);scheduleSaveItems();renderItems();updateSummaryBar();}
+function addItem(cat){
+  const inp=document.getElementById('add-'+cat);if(!inp||!inp.value.trim())return;
   moveItems.push({id:'item_'+Date.now(),cat,name:inp.value.trim(),status:'unsure',transport:'',special:false,specialNote:'',disposeMethod:'',disposeDone:false});
-  scheduleSaveItems(); renderItems(); updateSummaryBar();
+  scheduleSaveItems();renderItems();updateSummaryBar();
 }
-function updateSummaryBar() {
+function updateSummaryBar(){
   document.getElementById('sb-keep').textContent=moveItems.filter(i=>i.status==='keep').length;
   document.getElementById('sb-dispose').textContent=moveItems.filter(i=>i.status==='dispose').length;
   document.getElementById('sb-unsure').textContent=moveItems.filter(i=>i.status==='unsure').length;
   document.getElementById('sb-unassigned').textContent=moveItems.filter(i=>i.status==='keep'&&!i.transport).length;
 }
 
-// ══ SATURDAY ══════════════════════════════════════════════
-function renderSaturday() {
-  let thtml='';
-  tasks.forEach(t=>{
-    thtml+=`<div class="task-card">
-      <div class="task-check ${t.done?'checked':''}" onclick="toggleTask('${t.id}')"></div>
-      <div class="task-body">
-        <div class="task-text ${t.done?'checked-text':''}">${t.text}</div>
-        <input class="task-note-input" placeholder="Add a note…" value="${t.note||''}" oninput="setTaskNote('${t.id}',this.value)">
-      </div>
-    </div>`;
+// ── SATURDAY (priority system, stable notes input) ──────
+const PRIOS=['p0','p1','p2'];
+const PRIO_LABELS={p0:'P0 — Critical',p1:'P1 — Important',p2:'P2 — Nice to do'};
+const PRIO_NEXT={p0:'p1',p1:'p2',p2:'p0'};
+
+function renderSaturday(){
+  // progress
+  const total=tasks.length,done=tasks.filter(t=>t.done).length;
+  document.getElementById('progress-count').textContent=`${done} / ${total}`;
+  document.getElementById('progress-fill').style.width=total>0?`${Math.round(done/total*100)}%`:'0%';
+
+  let html='';
+  // render p0, p1, p2 active tasks, then done tasks
+  PRIOS.forEach(p=>{
+    const grp=tasks.filter(t=>t.priority===p&&!t.done);
+    if(!grp.length)return;
+    const badgeClass=`${p}-badge`;
+    html+=`<div class="priority-section">
+      <div class="priority-header">
+        <span class="priority-badge ${badgeClass}">${p.toUpperCase()}</span>
+        <span class="priority-label">${PRIO_LABELS[p]}</span>
+      </div>`;
+    grp.forEach(t=>{html+=renderTaskCard(t);});
+    html+=`</div>`;
   });
-  document.getElementById('tasks-list').innerHTML=thtml;
+
+  // done tasks
+  const doneTasks=tasks.filter(t=>t.done);
+  if(doneTasks.length){
+    html+=`<div class="priority-section">
+      <div class="priority-header"><span class="priority-badge done-badge">Done</span></div>`;
+    doneTasks.forEach(t=>{html+=renderTaskCard(t);});
+    html+=`</div>`;
+  }
+
+  document.getElementById('tasks-list').innerHTML=html;
+
+  // unsure items
   const unsure=moveItems.filter(i=>i.status==='unsure');
   let uhtml=unsure.length===0?'<p style="color:#ccc;font-size:.8rem;font-style:italic">All items resolved ✓</p>':'';
   unsure.forEach(item=>{
@@ -554,60 +520,87 @@ function renderSaturday() {
   });
   document.getElementById('unsure-list').innerHTML=uhtml;
 }
-function toggleTask(id) {
-  const t=tasks.find(t=>t.id===id); if(t){t.done=!t.done;scheduleSaveTasks();renderSaturday();}
-}
-function setTaskNote(id,val) {
-  const t=tasks.find(t=>t.id===id); if(t){t.note=val;scheduleSaveTasks();}
-}
-function addTask() {
-  const inp=document.getElementById('new-task-input'); if(!inp||!inp.value.trim()) return;
-  tasks.push({id:'task_'+Date.now(),text:inp.value.trim(),done:false,note:''});
-  inp.value=''; scheduleSaveTasks(); renderSaturday();
-}
-function setStatusAndRefresh(id,status) {
-  const item=moveItems.find(i=>i.id===id); if(item){item.status=status;scheduleSaveItems();renderSaturday();updateSummaryBar();}
+
+function renderTaskCard(t){
+  const nextP=PRIO_NEXT[t.priority]||'p1';
+  const badgeClass=`${t.priority}-badge`;
+  return `<div class="task-card ${t.done?'done-card':''}" id="tcard-${t.id}">
+    <div class="task-check ${t.done?'checked':''}" onclick="toggleTask('${t.id}')"></div>
+    <div class="task-body">
+      <div class="task-text ${t.done?'checked-text':''}">${t.text}</div>
+      <textarea class="task-note-input" placeholder="Add a note…"
+        rows="1"
+        onfocus="this.dataset.focused='1'"
+        onblur="this.dataset.focused='0';saveTaskNote('${t.id}',this.value)"
+        oninput="autoResize(this)">${t.note||''}</textarea>
+    </div>
+    ${!t.done?`<div class="task-actions">
+      <button class="prio-btn ${badgeClass}" onclick="cycleTaskPriority('${t.id}')" title="Change priority">${t.priority.toUpperCase()}</button>
+    </div>`:''}
+  </div>`;
 }
 
-// ══ SUNDAY ════════════════════════════════════════════════
-function renderSunday() {
+function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'px';}
+
+function toggleTask(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  t.done=!t.done;scheduleSaveTasks();renderSaturday();updateProgressBar();
+}
+function saveTaskNote(id,val){
+  const t=tasks.find(t=>t.id===id);if(t){t.note=val;scheduleSaveTasks();}
+}
+function cycleTaskPriority(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  t.priority=PRIO_NEXT[t.priority]||'p1';
+  scheduleSaveTasks();renderSaturday();
+}
+function addTask(){
+  const inp=document.getElementById('new-task-input');if(!inp||!inp.value.trim())return;
+  tasks.push({id:'task_'+Date.now(),text:inp.value.trim(),done:false,note:'',priority:'p1'});
+  inp.value='';scheduleSaveTasks();renderSaturday();
+}
+function updateProgressBar(){
+  const total=tasks.length,done=tasks.filter(t=>t.done).length;
+  const countEl=document.getElementById('progress-count');
+  const fillEl=document.getElementById('progress-fill');
+  if(countEl)countEl.textContent=`${done} / ${total}`;
+  if(fillEl)fillEl.style.width=total>0?`${Math.round(done/total*100)}%`:'0%';
+}
+function setStatusAndRefresh(id,status){
+  const item=moveItems.find(i=>i.id===id);if(item){item.status=status;scheduleSaveItems();renderSaturday();updateSummaryBar();}
+}
+
+// ── SUNDAY ─────────────────────────────────────────────
+function renderSunday(){
   const porters=moveItems.filter(i=>i.transport==='Porters'&&i.status!=='dispose');
   const cab=moveItems.filter(i=>i.transport==='Cab'&&i.status!=='dispose');
   const scooter=moveItems.filter(i=>i.transport==='Scooter'&&i.status!=='dispose');
   const unassigned=moveItems.filter(i=>i.status==='keep'&&!i.transport);
   let html='';
-  if(unassigned.length>0) html+=`<div class="warning-banner">⚠ ${unassigned.length} kept item${unassigned.length>1?'s':''} still have no transport assigned.</div>`;
+  if(unassigned.length)html+=`<div class="warning-banner">⚠ ${unassigned.length} kept item${unassigned.length>1?'s':''} still have no transport assigned.</div>`;
   html+=`<div class="sunday-section"><div class="sunday-section-title">Porter Load</div>`;
-  if(!porters.length) html+=`<div class="sunday-empty">No items assigned to Porters yet</div>`;
+  if(!porters.length)html+=`<div class="sunday-empty">No items assigned to Porters yet</div>`;
   else MOVE_CATEGORIES.forEach(cat=>{
-    const grp=porters.filter(i=>i.cat===cat); if(!grp.length) return;
+    const grp=porters.filter(i=>i.cat===cat);if(!grp.length)return;
     html+=`<div class="sunday-group"><div class="sunday-group-name">${cat}</div>`;
-    grp.forEach(item=>{
-      html+=`<div class="sunday-item"><div class="sunday-item-name">${item.name}</div>`;
-      if(item.special&&item.specialNote) html+=`<div class="sunday-special">⚑ ${item.specialNote}</div>`;
-      html+=`</div>`;
-    });
+    grp.forEach(item=>{html+=`<div class="sunday-item"><div class="sunday-item-name">${item.name}</div>${item.special&&item.specialNote?`<div class="sunday-special">⚑ ${item.specialNote}</div>`:''}</div>`;});
     html+=`</div>`;
   });
   html+=`</div><div class="sunday-section"><div class="sunday-section-title">Cab Load — Lin's checklist</div>`;
-  if(!cab.length) html+=`<div class="sunday-empty">No items assigned to Cab yet</div>`;
-  else cab.forEach(item=>{
-    html+=`<div class="sunday-item"><div class="sunday-item-name">${item.name}</div>`;
-    if(item.special&&item.specialNote) html+=`<div class="sunday-special">⚑ ${item.specialNote}</div>`;
-    html+=`</div>`;
-  });
+  if(!cab.length)html+=`<div class="sunday-empty">No items assigned to Cab yet</div>`;
+  else cab.forEach(item=>{html+=`<div class="sunday-item"><div class="sunday-item-name">${item.name}</div>${item.special&&item.specialNote?`<div class="sunday-special">⚑ ${item.specialNote}</div>`:''}</div>`;});
   html+=`</div><div class="sunday-section"><div class="sunday-section-title">Scooter Load</div>`;
-  if(!scooter.length) html+=`<div class="sunday-empty">No items assigned to Scooter yet</div>`;
-  else scooter.forEach(item=>{ html+=`<div class="sunday-item"><div class="sunday-item-name">${item.name}</div></div>`; });
+  if(!scooter.length)html+=`<div class="sunday-empty">No items assigned to Scooter yet</div>`;
+  else scooter.forEach(item=>{html+=`<div class="sunday-item"><div class="sunday-item-name">${item.name}</div></div>`;});
   html+=`</div>`;
   document.getElementById('sunday-content').innerHTML=html;
 }
 
-// ══ DISPOSE ═══════════════════════════════════════════════
-function renderDispose() {
+// ── DISPOSE ────────────────────────────────────────────
+function renderDispose(){
   const di=moveItems.filter(i=>i.status==='dispose');
   let html='';
-  if(!di.length) html='<p style="color:#ccc;font-size:.85rem;font-style:italic;padding:12px 0">No items marked for disposal yet</p>';
+  if(!di.length)html='<p style="color:#ccc;font-size:.85rem;font-style:italic;padding:12px 0">No items marked for disposal yet</p>';
   else di.forEach(item=>{
     html+=`<div class="dispose-item">
       <div class="dispose-top">
@@ -621,39 +614,30 @@ function renderDispose() {
   const done=di.filter(i=>i.disposeDone).length;
   document.getElementById('dispose-progress').textContent=di.length>0?`${done} of ${di.length} disposed`:'';
 }
-function toggleDisposeDone(id) {
-  const item=moveItems.find(i=>i.id===id); if(item){item.disposeDone=!item.disposeDone;scheduleSaveItems();renderDispose();}
-}
-function setDisposeMethod(id,val) {
-  const item=moveItems.find(i=>i.id===id); if(item){item.disposeMethod=val;scheduleSaveItems();}
-}
+function toggleDisposeDone(id){const item=moveItems.find(i=>i.id===id);if(item){item.disposeDone=!item.disposeDone;scheduleSaveItems();renderDispose();}}
+function setDisposeMethod(id,val){const item=moveItems.find(i=>i.id===id);if(item){item.disposeMethod=val;scheduleSaveItems();}}
 
-// ══ DIM ROOMS ═════════════════════════════════════════════
+// ── DIM ROOMS ──────────────────────────────────────────
 function rdim(id){return dimData[id]||{dims:{},notes:''};}
 function fmtDim(d){if(!d||(!d.ft&&!d.inch))return"0'0\"";return`${d.ft||0}'${d.inch||0}"`;}
 function fmtDimLong(d){if(!d||(!d.ft&&!d.inch))return'—';return`${d.ft||0}' ${d.inch||0}"`;}
 
-function buildDimCards() {
-  const g=document.getElementById('room-grid'); g.innerHTML='';
+function buildDimCards(){
+  const g=document.getElementById('room-grid');g.innerHTML='';
   DIM_ROOMS.forEach(room=>{
-    const r=rdim(room.id);
-    const allF=room.fields.flatMap(g=>g.items);
+    const r=rdim(room.id),allF=room.fields.flatMap(g=>g.items);
     const filled=allF.filter(f=>r.dims[f.id]?.ft||r.dims[f.id]?.inch).length;
     const cls=filled===0?'':filled===allF.length?'complete':'partial';
     const xv=r.dims['x'],yv=r.dims['y'];
     const preview=(xv?.ft||xv?.inch||yv?.ft||yv?.inch)?`${fmtDim(xv)} × ${fmtDim(yv)}`:'';
-    const c=document.createElement('div');
-    c.className=`room-card ${cls}`;
-    c.onclick=()=>openDimRoom(room.id);
-    c.innerHTML=`<div class="dot ${filled>0?'on':''}"></div><h3>${room.name}</h3>
-      <div class="card-footer"><div class="dim-preview">${preview}</div><div style="font-size:.85rem;color:#aaa">↗</div></div>`;
+    const c=document.createElement('div');c.className=`room-card ${cls}`;c.onclick=()=>openDimRoom(room.id);
+    c.innerHTML=`<div class="dot ${filled>0?'on':''}"></div><h3>${room.name}</h3><div class="card-footer"><div class="dim-preview">${preview}</div><div style="font-size:.85rem;color:#aaa">↗</div></div>`;
     g.appendChild(c);
   });
 }
-function openDimRoom(id) {
+function openDimRoom(id){
   currentDimRoom=id;
-  const room=DIM_ROOMS.find(r=>r.id===id);
-  const r=rdim(id);
+  const room=DIM_ROOMS.find(r=>r.id===id),r=rdim(id);
   document.getElementById('room-title').textContent=room.name;
   let html='';
   room.fields.forEach(group=>{
@@ -671,48 +655,41 @@ function openDimRoom(id) {
     html+=`</div>`;
   });
   html+=`<div class="notes-group"><div class="notes-label">Notes</div>
-    <textarea id="notes-area" placeholder="Anything to note…" oninput="onNotesInput(this)">${r.notes||''}</textarea>
+    <textarea id="notes-area" placeholder="Anything to note…"
+      onfocus="this.dataset.focused='1'"
+      onblur="this.dataset.focused='0';onNotesBlur(this)">${r.notes||''}</textarea>
   </div><div class="save-indicator" id="save-ind"></div>`;
   document.getElementById('room-content').innerHTML=html;
   document.getElementById('home-main').style.display='none';
   document.getElementById('screen-room').style.display='block';
   window.scrollTo(0,0);
 }
-function onDimInput(el) {
-  if(!dimData[currentDimRoom]) dimData[currentDimRoom]={dims:{},notes:''};
-  if(!dimData[currentDimRoom].dims[el.dataset.field]) dimData[currentDimRoom].dims[el.dataset.field]={};
+function onDimInput(el){
+  if(!dimData[currentDimRoom])dimData[currentDimRoom]={dims:{},notes:''};
+  if(!dimData[currentDimRoom].dims[el.dataset.field])dimData[currentDimRoom].dims[el.dataset.field]={};
   dimData[currentDimRoom].dims[el.dataset.field][el.dataset.part]=el.value;
-  const ind=document.getElementById('save-ind'); if(ind) ind.textContent='Saving…';
-  clearTimeout(saveTimer);
-  saveTimer=setTimeout(async()=>{
-    await sbSet('dims',dimData);
-    buildDimCards();
-    const i2=document.getElementById('save-ind');
-    if(i2){i2.textContent='Saved ✓';setTimeout(()=>{if(i2)i2.textContent='';},1400);}
+  const ind=document.getElementById('save-ind');if(ind)ind.textContent='Saving…';
+  clearTimeout(dimSaveTimer);
+  dimSaveTimer=setTimeout(async()=>{
+    await sbSet('dims',dimData);buildDimCards();
+    const i2=document.getElementById('save-ind');if(i2){i2.textContent='Saved ✓';setTimeout(()=>{if(i2)i2.textContent='';},1400);}
   },700);
 }
-function onNotesInput(el) {
-  if(!dimData[currentDimRoom]) dimData[currentDimRoom]={dims:{},notes:''};
+function onNotesBlur(el){
+  if(!dimData[currentDimRoom])dimData[currentDimRoom]={dims:{},notes:''};
   dimData[currentDimRoom].notes=el.value;
-  clearTimeout(saveTimer);
-  saveTimer=setTimeout(async()=>{
-    await sbSet('dims',dimData);
-    const i=document.getElementById('save-ind');
-    if(i){i.textContent='Saved ✓';setTimeout(()=>{if(i)i.textContent='';},1400);}
-  },800);
+  sbSet('dims',dimData);
+  const ind=document.getElementById('save-ind');if(ind){ind.textContent='Saved ✓';setTimeout(()=>{if(ind)ind.textContent='';},1400);}
 }
-function showDimSummary() {
+function showDimSummary(){
   let html='';
   DIM_ROOMS.forEach(room=>{
-    const r=rdim(room.id); const allF=room.fields.flatMap(g=>g.items);
+    const r=rdim(room.id),allF=room.fields.flatMap(g=>g.items);
     const hasAny=allF.some(f=>r.dims[f.id]?.ft||r.dims[f.id]?.inch);
     html+=`<div class="summary-room"><h3>${room.name}</h3>`;
-    if(!hasAny) html+=`<div class="empty-note">No dimensions yet</div>`;
-    else allF.forEach(f=>{
-      const d=r.dims[f.id]; if(!d?.ft&&!d?.inch) return;
-      html+=`<div class="summary-row"><span>${f.label}</span><span class="summary-val">${fmtDimLong(d)}</span></div>`;
-    });
-    if(r.notes) html+=`<div style="margin-top:8px;font-size:.75rem;color:#999;font-style:italic">${r.notes}</div>`;
+    if(!hasAny)html+=`<div class="empty-note">No dimensions yet</div>`;
+    else allF.forEach(f=>{const d=r.dims[f.id];if(!d?.ft&&!d?.inch)return;html+=`<div class="summary-row"><span>${f.label}</span><span class="summary-val">${fmtDimLong(d)}</span></div>`;});
+    if(r.notes)html+=`<div style="margin-top:8px;font-size:.75rem;color:#999;font-style:italic">${r.notes}</div>`;
     html+=`</div>`;
   });
   document.getElementById('summary-content').innerHTML=html;
@@ -721,30 +698,24 @@ function showDimSummary() {
   window.scrollTo(0,0);
 }
 
-// ══ EXPORT ════════════════════════════════════════════════
-function showExport() {
-  document.getElementById('home-main').style.display='none';
-  document.getElementById('screen-export').style.display='block';
-}
-function exportXML() {
+function showExport(){document.getElementById('home-main').style.display='none';document.getElementById('screen-export').style.display='block';}
+function exportXML(){
   const date=new Date().toISOString().split('T')[0];
   let xml=`<?xml version="1.0" encoding="UTF-8"?>\n<home name="Linnet &amp; Teal's 2BHK" exported="${date}">\n`;
   DIM_ROOMS.forEach(room=>{
-    const r=rdim(room.id); const allF=room.fields.flatMap(g=>g.items);
+    const r=rdim(room.id),allF=room.fields.flatMap(g=>g.items);
     xml+=`  <room id="${room.id}" name="${room.name}">\n`;
     allF.forEach(f=>{const d=r.dims[f.id];if(d?.ft||d?.inch)xml+=`    <dimension label="${f.label}" ft="${d.ft||0}" inch="${d.inch||0}"/>\n`;});
     if(r.notes)xml+=`    <notes>${r.notes.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</notes>\n`;
     xml+=`  </room>\n`;
   });
-  xml+=`</home>`;
-  dlFile('lt2bhk-dimensions.xml',xml,'application/xml');
-  showToast('XML downloaded ✓');
+  xml+=`</home>`;dlFile('lt2bhk-dimensions.xml',xml,'application/xml');showToast('XML downloaded ✓');
 }
-function exportPDF() {
+function exportPDF(){
   const date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
   let html=`<h1>Linnet &amp; Teal's 2BHK</h1><div class="print-date">Exported ${date}</div>`;
   DIM_ROOMS.forEach(room=>{
-    const r=rdim(room.id); const allF=room.fields.flatMap(g=>g.items);
+    const r=rdim(room.id),allF=room.fields.flatMap(g=>g.items);
     const hasAny=allF.some(f=>r.dims[f.id]?.ft||r.dims[f.id]?.inch);
     html+=`<div class="print-room"><h2>${room.name}</h2>`;
     if(!hasAny)html+=`<div class="print-empty">No dimensions recorded</div>`;
@@ -755,64 +726,42 @@ function exportPDF() {
   document.getElementById('print-area').innerHTML=html;
   setTimeout(()=>{window.print();showToast('Print dialog opened');},100);
 }
-function dlFile(name,content,type) {
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([content],{type}));
-  a.download=name;a.click();URL.revokeObjectURL(a.href);
-}
+function dlFile(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href);}
 
-// ══ REALTIME ══════════════════════════════════════════════
-function startRealtime() {
-  const wsUrl = SB_URL.replace('https://','wss://') + '/realtime/v1/websocket?apikey=' + SB_KEY + '&vsn=1.0.0';
-  const ws = new WebSocket(wsUrl);
-  let heartbeat;
-
-  ws.onopen = () => {
-    // join the realtime channel for our table
-    ws.send(JSON.stringify({ topic:'realtime:public:lt2bhk_data', event:'phx_join', payload:{config:{broadcast:{self:false},presence:{key:''},postgres_changes:[{event:'*',schema:'public',table:'lt2bhk_data'}]}}, ref:'1' }));
-    heartbeat = setInterval(() => ws.send(JSON.stringify({topic:'phoenix',event:'heartbeat',payload:{},ref:'hb'})), 25000);
+// ── REALTIME ───────────────────────────────────────────
+function startRealtime(){
+  const ws=new WebSocket(SB_URL.replace('https://','wss://')+'/realtime/v1/websocket?apikey='+SB_KEY+'&vsn=1.0.0');
+  let hb;
+  ws.onopen=()=>{
+    ws.send(JSON.stringify({topic:'realtime:public:lt2bhk_data',event:'phx_join',payload:{config:{broadcast:{self:false},presence:{key:''},postgres_changes:[{event:'*',schema:'public',table:'lt2bhk_data'}]}},ref:'1'}));
+    hb=setInterval(()=>ws.send(JSON.stringify({topic:'phoenix',event:'heartbeat',payload:{},ref:'hb'})),25000);
   };
-
-  ws.onmessage = async (e) => {
-    try {
-      const msg = JSON.parse(e.data);
-      if (msg.event !== 'postgres_changes') return;
-      const rec = msg.payload?.data?.record;
-      if (!rec) return;
-      const val = JSON.parse(rec.value);
-      // update local state and re-render
-      if (rec.key === 'dims') {
-        dimData = val; buildDimCards();
-      } else if (rec.key === 'items') {
-        moveItems = val;
-        const active = document.querySelector('.move-subtab.active')?.textContent?.toLowerCase();
-        if (active==='items'){renderItems();updateSummaryBar();}
-        else if (active==='saturday') renderSaturday();
-        else if (active==='sunday') renderSunday();
-        else if (active==='dispose') renderDispose();
+  ws.onmessage=async e=>{
+    try{
+      const msg=JSON.parse(e.data);
+      if(msg.event!=='postgres_changes')return;
+      const rec=msg.payload?.data?.record;if(!rec)return;
+      const val=JSON.parse(rec.value);
+      if(rec.key==='dims'){dimData=val;buildDimCards();}
+      else if(rec.key==='items'){
+        moveItems=val;
+        const active=document.querySelector('.move-subtab.active')?.textContent?.toLowerCase();
+        if(active==='items'){renderItems();updateSummaryBar();}
+        else if(active==='saturday')renderSaturday();
+        else if(active==='sunday')renderSunday();
+        else if(active==='dispose')renderDispose();
         updateSummaryBar();
-      } else if (rec.key === 'tasks') {
-        tasks = val;
-        const active = document.querySelector('.move-subtab.active')?.textContent?.toLowerCase();
-        if (active==='saturday') renderSaturday();
-      } else if (rec.key === 'sketch') {
-        showSketchImg(val);
       }
+      else if(rec.key==='tasks'){tasks=val.map(t=>({priority:'p1',...t}));const active=document.querySelector('.move-subtab.active')?.textContent?.toLowerCase();if(active==='saturday')renderSaturday();}
+      else if(rec.key==='sketch')showSketchImg(val);
       setSyncStatus('synced');
-    } catch {}
+    }catch{}
   };
-
-  ws.onclose = () => {
-    clearInterval(heartbeat);
-    setSyncStatus('error');
-    // reconnect after 3s
-    setTimeout(startRealtime, 3000);
-  };
-
-  ws.onerror = () => setSyncStatus('error');
+  ws.onclose=()=>{clearInterval(hb);setSyncStatus('error');setTimeout(startRealtime,3000);};
+  ws.onerror=()=>setSyncStatus('error');
 }
 
-// ══ INIT ══════════════════════════════════════════════════
+// ── INIT ───────────────────────────────────────────────
 (async()=>{
   setSyncStatus('syncing');
   await loadAll();
